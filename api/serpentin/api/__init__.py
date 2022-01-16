@@ -9,6 +9,7 @@ def register_api(app):
     import serpentin.api.compensations
     import serpentin.api.deals
     import serpentin.api.statements
+    import serpentin.api.sales
 
     app.register_blueprint(api_bp, url_prefix="/api")
 
