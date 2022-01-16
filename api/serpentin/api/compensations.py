@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from serpentin.api import api
-from serpentin.managers.compensations import get_simple_compensations
+from serpentin.managers.compensations import get_simple_compensations, create_simple_compensation
 
 
 class SimpleCompensations(Resource):
