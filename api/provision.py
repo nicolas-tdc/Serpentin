@@ -67,7 +67,7 @@ def provision_database():
                     deals_amount=monthly_deals_total,
                 )
 
-                name = sale.name.replace(' ', '-').lower() + "_" + str(month) + "-" + str(year)
+                name = sale.name + " " + str(month) + "/" + str(year)
                 draft = random.choice([True, False])
                 for ct in ['Simple', 'Complex']:
                     if ct == 'Simple':
