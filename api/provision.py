@@ -19,7 +19,10 @@ fake = Faker("fr-FR")
 @db_session
 def provision_database():
     for _ in range(5):
-        Sales(name=fake.name())
+        Sales(
+            name=fake.name(),
+            target=random.randint(20, 70) * 100
+        )
     commit()
 
     sales = select(s for s in Sales)
@@ -29,15 +32,17 @@ def provision_database():
             for month in range(1, 13):
                 month_range = calendar.monthrange(year, month)
                 deals_count = 0
+                closed_deals_count = 0
                 monthly_deals_total = 0
                 for _ in range(random.randint(2, 10)):
                     closed = random.random() > 0.5
                     deal_amount = random.randint(10, 50) * 100
+                    deals_count += 1
 
                     close_date = None
                     if closed:
                         monthly_deals_total += deal_amount
-                        deals_count += 1
+                        closed_deals_count += 1
                         close_date = fake.date_between(
                             start_date=datetime.date(month=month, year=year, day=1),
                             end_date=datetime.date(
@@ -59,26 +64,29 @@ def provision_database():
                     sales=sale,
                     month=month,
                     year=year,
+                    deals_amount=monthly_deals_total,
                 )
 
                 name = sale.name.replace(' ', '-').lower() + "_" + str(month) + "-" + str(year)
-                compensation_type = random.choice(['Simple', 'Complex'])
                 draft = random.choice([True, False])
-                if compensation_type == 'Simple':
-                    amount = CompensationHelpers.calculate_simple_compensation(deals_count, monthly_deals_total)
-                elif compensation_type == 'Complex':
-                    amount = CompensationHelpers.calculate_complex_compensation(deals_count, monthly_deals_total)
-                else:
-                    amount = 0
+                for ct in ['Simple', 'Complex']:
+                    if ct == 'Simple':
+                        amount = CompensationHelpers.calculate_simple_compensation(deals_count, monthly_deals_total)
+                    elif ct == 'Complex':
+                        amount = CompensationHelpers.calculate_complex_compensation(
+                            closed_deals_count, monthly_deals_total, sale.target
+                        )
+                    else:
+                        amount = 0
 
-                Compensation(
-                    name=name,
-                    type=compensation_type,
-                    draft=draft,
-                    amount=amount,
-                    deals_count=deals_count,
-                    statement=statement,
-                )
+                    Compensation(
+                        name=name,
+                        type=ct,
+                        draft=draft,
+                        amount=amount,
+                        deals_count=deals_count,
+                        statement=statement,
+                    )
 
     commit()
 
