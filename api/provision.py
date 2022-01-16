@@ -85,6 +85,7 @@ def provision_database():
                         draft=draft,
                         amount=amount,
                         deals_count=deals_count,
+                        closed_deals_count=closed_deals_count,
                         statement=statement,
                     )
 

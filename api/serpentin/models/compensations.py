@@ -8,7 +8,8 @@ class Compensation(db.Entity):
     name = Required(str)
     type = Required(str)  # Can be Simple or Complex
     amount = Required(float)
-    deals_count = Required(int)
+    deals_count = Optional(int)
+    closed_deals_count = Optional(int)
     draft = Optional(bool)
 
     statement = Required(Statement)
@@ -19,5 +20,6 @@ class Compensation(db.Entity):
             "type": self.type,
             "amount": self.amount,
             "deals-count": self.deals_count,
+            "closed-deals-count": self.closed_deals_count,
             "draft": self.draft,
         }
