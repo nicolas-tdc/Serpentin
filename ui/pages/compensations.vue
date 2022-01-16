@@ -26,6 +26,7 @@ export default {
         { text: "Type", value: "type" },
         { text: "Amount", value: "amount" },
         { text: "Deals count", value: "deals-count" },
+        { text: "Closed deals count", value: "closed-deals-count" },
         { text: "Draft", value: "draft" },
       ],
       compensations: [],
