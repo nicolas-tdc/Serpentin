@@ -1,4 +1,4 @@
 .idea/
 __pycache__/
-package-lock.json/
-database.sqlite/
+*/package-lock.json/
+*.sqlite/
