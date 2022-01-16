@@ -1,7 +1,6 @@
 from pony.orm import Required, Set
 
 from serpentin.core.database import db
-from serpentin.models.compensations import Compensation
 from serpentin.models.sales import Sales
 
 
@@ -9,24 +8,18 @@ class Statement(db.Entity):
     sales = Required(Sales)
     month = Required(int)
     year = Required(int)
-
-    compensations = Set("StatementCompensation")
+    compensations = Set("Compensation")
 
     def get_formatted_data(self) -> dict:
+        formatted_compensations = {}
+        for c in self.compensations:
+            # if c.draft is True:
+            formatted_compensations['amount'] = c.amount
+            formatted_compensations['type'] = c.type
+
         return {
             "sales": self.sales.name,
             "month": self.month,
             "year": self.year,
-        }
-
-
-class StatementCompensation(db.Entity):
-    compensation = Required(Compensation)
-    statement = Required(Statement)
-    amount = Required(float)
-
-    def get_formatted_data(self) -> dict:
-        return {
-            "compensation": self.compensation.get_formatted_data(),
-            "amount": self.amount,
+            "compensation": formatted_compensations,
         }
