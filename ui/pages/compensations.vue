@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1 class="mb-10">Simple Compensations</h1>
+    <h1 class="mb-10">Compensations</h1>
 
     <v-data-table
-      v-if="simple_compensations"
+      v-if="compensations"
       :headers="headers"
-      :items="simple_compensations"
+      :items="compensations"
       :items-per-page="5"
       class="elevation-1"
     ></v-data-table>
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "simple_compensations",
+  name: "compensations",
   data() {
     return {
       headers: [
@@ -23,17 +23,21 @@ export default {
           align: "start",
           value: "name",
         },
+        { text: "Type", value: "type" },
+        { text: "Amount", value: "amount" },
+        { text: "Deals count", value: "deals-count" },
+        { text: "Draft", value: "draft" },
       ],
-      simple_compensations: [],
+      compensations: [],
     };
   },
   created() {
-    this.fetchSimpleCompensations();
+    this.fetchCompensations();
   },
   methods: {
-    fetchSimpleCompensations() {
-      this.$axios.get("api/simple-compensations").then((response) => {
-        this.simple_compensations = response.data.simple-compensations;
+    fetchCompensations() {
+      this.$axios.get("api/compensations").then((response) => {
+        this.compensations = response.data.compensations;
       });
     },
   },

@@ -21,8 +21,13 @@ export default {
         {
           text: "Name",
           align: "start",
-          value: "name",
+          value: "sales",
         },
+        { text: "Month", value: "month" },
+        { text: "Year", value: "year" },
+        { text: "Deals Amount", value: "deals_amount" },
+        { text: "Compensation Type", value: "compensation.type"},
+        { text: "Compensation", value: "compensation.amount" },
       ],
       statements: [],
     };
