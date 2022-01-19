@@ -12,16 +12,23 @@ class Statement(db.Entity):
     compensations = Set("Compensation")
 
     def get_formatted_data(self) -> dict:
-        formatted_compensations = {}
-        for c in self.compensations:
-            # if c.draft is True:
-            formatted_compensations['amount'] = c.amount
-            formatted_compensations['type'] = c.type
-
         return {
             "sales": self.sales.name,
             "month": self.month,
             "year": self.year,
             "deals_amount": self.deals_amount,
-            "compensation": formatted_compensations,
+            "compensation": self.get_attached_compensations(),
         }
+
+    def get_partial_data(self) -> dict:
+        return {
+            "deals_amount": self.deals_amount,
+            "compensation": self.get_attached_compensations(),
+        }
+
+    def get_attached_compensations(self) -> dict:
+        formatted_compensations = []
+        for compensation in self.compensations:
+            formatted_compensations.append(compensation.get_partial_data())
+
+        return formatted_compensations

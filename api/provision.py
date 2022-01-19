@@ -34,11 +34,11 @@ def provision_database():
                 deals_count = 0
                 closed_deals_count = 0
                 monthly_deals_total = 0
+
                 for _ in range(random.randint(2, 10)):
                     closed = random.random() > 0.5
                     deal_amount = random.randint(10, 50) * 100
                     deals_count += 1
-
                     close_date = None
                     if closed:
                         monthly_deals_total += deal_amount
@@ -70,12 +70,13 @@ def provision_database():
                 name = sale.name + " " + str(month) + "/" + str(year)
                 draft = random.choice([True, False])
                 for ct in ['Simple', 'Complex']:
+                    compensation_helper = CompensationHelpers(
+                        deals_count, closed_deals_count, monthly_deals_total, sale.target
+                    )
                     if ct == 'Simple':
-                        amount = CompensationHelpers.calculate_simple_compensation(deals_count, monthly_deals_total)
+                        amount = compensation_helper.calculate_simple_compensation()
                     elif ct == 'Complex':
-                        amount = CompensationHelpers.calculate_complex_compensation(
-                            closed_deals_count, monthly_deals_total, sale.target
-                        )
+                        amount = compensation_helper.calculate_complex_compensation()
                     else:
                         amount = 0
 

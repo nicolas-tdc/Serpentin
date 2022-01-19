@@ -23,3 +23,11 @@ class Compensation(db.Entity):
             "closed-deals-count": self.closed_deals_count,
             "draft": self.draft,
         }
+
+    def get_partial_data(self) -> dict:
+        return {
+            "type": self.type,
+            "amount": self.amount,
+            "deals-count": self.deals_count,
+            "closed-deals-count": self.closed_deals_count,
+        }
