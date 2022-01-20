@@ -10,7 +10,7 @@ class Statements(Resource):
         """Return statements"""
 
         statements = get_statements()
-        formatted_statements = [s.get_formatted_data() for s in statements]
+        formatted_statements = [statement.get_formatted_data() for statement in statements]
 
         return {"statements": formatted_statements}
 
@@ -24,7 +24,7 @@ class StatementsBySales(Resource):
 
         sales = Sales[sales_id]
         statements = get_statements_by_sales(sales)
-        formatted_statements = [s.get_formatted_data() for s in statements]
+        formatted_statements = [statement.get_formatted_data() for statement in statements]
 
         return {"statement": formatted_statements}
 

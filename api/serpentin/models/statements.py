@@ -17,18 +17,21 @@ class Statement(db.Entity):
             "month": self.month,
             "year": self.year,
             "deals_amount": self.deals_amount,
-            "compensation": self.get_attached_compensations(),
+            "compensations": self.get_attached_compensations(),
         }
 
     def get_partial_data(self) -> dict:
         return {
             "deals_amount": self.deals_amount,
-            "compensation": self.get_attached_compensations(),
+            "compensations": self.get_attached_compensations(),
         }
 
     def get_attached_compensations(self) -> dict:
-        formatted_compensations = []
+        formatted_compensations = {}
         for compensation in self.compensations:
-            formatted_compensations.append(compensation.get_partial_data())
+            if compensation.type == 'Simple':
+                formatted_compensations['simple'] = compensation.get_partial_data()
+            else:
+                formatted_compensations['complex'] = compensation.get_partial_data()
 
         return formatted_compensations

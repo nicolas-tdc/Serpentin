@@ -2,9 +2,9 @@
   <v-container fluid grid-list-xl>
     <NavbarSerpentin/>
     <v-data-table
-      v-if="compensations"
+      v-if="deals"
       :headers="headers"
-      :items="compensations"
+      :items="deals"
       :items-per-page="5"
       class="elevation-1"
     ></v-data-table>
@@ -14,7 +14,7 @@
 <script>
 import NavbarSerpentin from '@/components/NavbarSerpentin'
 export default {
-  name: "compensations",
+  name: "deals",
   components: {
     NavbarSerpentin
   },
@@ -26,22 +26,22 @@ export default {
           align: "start",
           value: "name",
         },
-        { text: "Type", value: "type" },
+        { text: "Modified", value: "modified" },
         { text: "Amount", value: "amount" },
-        { text: "Deals count", value: "deals-count" },
-        { text: "Closed deals count", value: "closed-deals-count" },
-        { text: "Draft", value: "draft" },
+        { text: "Closed", value: "closed" },
+        { text: "Close date", value: "close_date" },
+        { text: "Owner", value: "owner" },
       ],
-      compensations: [],
+      deals: undefined,
     };
   },
   created() {
-    this.fetchCompensations();
+    this.fetchDeals();
   },
   methods: {
-    fetchCompensations() {
-      this.$axios.get("api/compensations").then((response) => {
-        this.compensations = response.data.compensations;
+    fetchDeals() {
+      this.$axios.get("api/deals").then((response) => {
+        this.deals = response.data.deals;
       });
     },
   },

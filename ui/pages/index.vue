@@ -1,45 +1,32 @@
 <template>
-  <div>
-    <h1 class="mb-10">Deals</h1>
-
-    <v-data-table
-      v-if="deals"
-      :headers="headers"
-      :items="deals"
-      :items-per-page="5"
-      class="elevation-1"
-    ></v-data-table>
-  </div>
+  <v-container fluid grid-list-xl>
+    <NavbarSerpentin/>
+    <v-layout justify-space-around>
+      <v-flex v-for="sale in sales">
+        <v-card color="gray" width="200px">
+          <v-card-title>{{ sale.name }}</v-card-title>
+          <v-card-text v-if="sale.target">{{ sale.target }}</v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
+import NavbarSerpentin from '@/components/NavbarSerpentin'
 export default {
   name: "index",
-  data() {
-    return {
-      headers: [
-        {
-          text: "Name",
-          align: "start",
-          value: "name",
-        },
-        { text: "Modified", value: "modified" },
-        { text: "Amount", value: "amount" },
-        { text: "Closed", value: "closed" },
-        { text: "Close date", value: "close_date" },
-        { text: "Owner", value: "owner" },
-      ],
-      deals: undefined,
-    };
+  components: {
+    NavbarSerpentin
   },
   created() {
-    this.fetchDeals();
+    this.fetchSales()
   },
   methods: {
-    fetchDeals() {
-      this.$axios.get("api/deals").then((response) => {
-        this.deals = response.data.deals;
-      });
+    fetchSales() {
+      this.$axios.get("api/sales").then((response) => {
+          this.sales = response.data.sales;
+        });
     },
   },
 };

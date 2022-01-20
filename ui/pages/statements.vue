@@ -1,33 +1,42 @@
 <template>
-  <div>
-    <h1 class="mb-10">Statements</h1>
-
+  <v-container fluid grid-list-xl>
+    <NavbarSerpentin/>
     <v-data-table
       v-if="statements"
       :headers="headers"
       :items="statements"
       :items-per-page="5"
       class="elevation-1"
-    ></v-data-table>
-  </div>
+    >
+      <template #item.date="{ item }">{{ item.month }}-{{ item.year }}</template>
+    </v-data-table>
+  </v-container>
 </template>
 
 <script>
+import NavbarSerpentin from '@/components/NavbarSerpentin'
 export default {
   name: "statements",
+  components: {
+    NavbarSerpentin
+  },
   data() {
     return {
+      items: [
+        { month: "month", year: "year" },
+      ],
       headers: [
         {
           text: "Name",
           align: "start",
           value: "sales",
         },
-        { text: "Month", value: "month" },
-        { text: "Year", value: "year" },
+        { text: "Date", value: "date" },
         { text: "Deals Amount", value: "deals_amount" },
-        { text: "Compensation Type", value: "compensation.type"},
-        { text: "Compensation", value: "compensation.amount" },
+        { text: "Deals", value: "compensations.simple.deals-count"},
+        { text: "Closed Deals", value: "compensations.simple.closed-deals-count" },
+        { text: "Simple Amount", value: "compensations.simple.amount"},
+        { text: "Complex Amount", value: "compensations.complex.amount"},
       ],
       statements: [],
     };

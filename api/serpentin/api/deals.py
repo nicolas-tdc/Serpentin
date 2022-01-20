@@ -8,7 +8,7 @@ class Deals(Resource):
         """Return deals"""
 
         deals = get_deals()
-        formatted_deals = [d.get_formatted_data() for d in deals]
+        formatted_deals = [deal.get_formatted_data() for deal in deals]
 
         return {"deals": formatted_deals}
 

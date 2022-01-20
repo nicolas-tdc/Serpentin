@@ -8,7 +8,7 @@ class Compensations(Resource):
         """Return compensations"""
 
         compensations = get_compensations()
-        formatted_compensations = [c.get_formatted_data() for c in compensations]
+        formatted_compensations = [compensation.get_formatted_data() for compensation in compensations]
 
         return {"compensations": formatted_compensations}
 
