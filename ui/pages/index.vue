@@ -76,6 +76,9 @@ export default {
         yAxes: [{
           ticks: {
             min: 0,
+            callback: function(value, index, values) {
+                return value + '€';
+            }
           }
         }]
       }

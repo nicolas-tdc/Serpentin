@@ -111,6 +111,11 @@ export default {
           id: 'A',
           type: 'linear',
           position: 'left',
+          ticks: {
+              callback: function(value, index, values) {
+                  return value + '€';
+              }
+          }
         }, {
           id: 'B',
           type: 'linear',
@@ -118,6 +123,10 @@ export default {
           ticks: {
             max: 20,
             min: 0
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Deals count'
           }
         }]
       }
