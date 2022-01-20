@@ -34,5 +34,5 @@ class Sales(db.Entity):
             "id": self.id,
             "name": self.name,
             "target": self.target,
-            "last_statements": sales_helpers.get_sales_deals(self.deals),
+            "deals": sales_helpers.get_sales_deals(self.deals),
         }
