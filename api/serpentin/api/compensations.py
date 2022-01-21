@@ -4,9 +4,12 @@ from serpentin.managers.compensations import get_compensations
 
 
 class Compensations(Resource):
-    def get(self):
-        """Return compensations"""
 
+    def get(self):
+        """
+        Returns formatted list of compensations.
+        :return: dict
+        """
         compensations = get_compensations()
         formatted_compensations = [compensation.get_formatted_data() for compensation in compensations]
 

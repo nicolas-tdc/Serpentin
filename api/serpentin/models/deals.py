@@ -6,16 +6,21 @@ from serpentin.models.sales import Sales
 
 
 class Deal(db.Entity):
+
     name = Required(str)
     active = Required(bool, sql_default=True)
     modified = Required(bool, sql_default=False)
-
     amount = Optional(float)
     closed = Optional(bool)
+
     close_date = Optional(date)
     owner = Optional(Sales)
 
     def get_formatted_data(self) -> dict:
+        """
+        Returns full formatted deal data.
+        :return: dict
+        """
         return {
             "name": self.name,
             "active": self.active,

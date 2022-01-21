@@ -5,4 +5,8 @@ from serpentin.models.sales import Sales
 
 
 def get_deals() -> list[Deal]:
+    """
+    Returns list of deals.
+    :return: list
+    """
     return select(deal for deal in Deal)

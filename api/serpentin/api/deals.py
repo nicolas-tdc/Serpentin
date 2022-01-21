@@ -4,9 +4,12 @@ from serpentin.managers.deals import get_deals
 
 
 class Deals(Resource):
-    def get(self):
-        """Return deals"""
 
+    def get(self):
+        """
+        Returns formatted list of deals.
+        :return: dict
+        """
         deals = get_deals()
         formatted_deals = [deal.get_formatted_data() for deal in deals]
 

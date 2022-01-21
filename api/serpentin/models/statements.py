@@ -12,6 +12,10 @@ class Statement(db.Entity):
     compensations = Set("Compensation")
 
     def get_formatted_data(self) -> dict:
+        """
+        Returns full formatted statement data.
+        :return: dict
+        """
         return {
             "sales": self.sales.name,
             "month": self.month,
@@ -21,12 +25,20 @@ class Statement(db.Entity):
         }
 
     def get_partial_data(self) -> dict:
+        """
+        Returns partial formatted compensation data.
+        :return: dict
+        """
         return {
             "deals_amount": self.deals_amount,
             "compensations": self.get_attached_compensations(),
         }
 
     def get_attached_compensations(self) -> dict:
+        """
+        Returns partial formatted statement attached compensation data.
+        :return: dict
+        """
         formatted_compensations = {}
         for compensation in self.compensations:
             if compensation.type == 'Simple':

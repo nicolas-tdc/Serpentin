@@ -11,6 +11,10 @@ class Sales(db.Entity):
     statements = Set("Statement")
 
     def get_sales(self) -> dict:
+        """
+        Returns formatted sales data with current month statement.
+        :return:
+        """
         sales_helpers = SalesHelpers()
         return {
             "id": self.id,
@@ -20,6 +24,11 @@ class Sales(db.Entity):
         }
 
     def get_sales_last_statements(self, count=12) -> dict:
+        """
+        Returns formatted sales data with n last statements (defaults to 12)
+        :param count:
+        :return: dict
+        """
         sales_helpers = SalesHelpers()
         return {
             "id": self.id,
@@ -29,6 +38,10 @@ class Sales(db.Entity):
         }
 
     def get_sales_deals(self) -> dict:
+        """
+        Returns formatted sales data with deals.
+        :return:
+        """
         sales_helpers = SalesHelpers()
         return {
             "id": self.id,

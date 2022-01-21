@@ -5,6 +5,7 @@ from serpentin.models.statements import Statement
 
 
 class Compensation(db.Entity):
+
     name = Required(str)
     type = Required(str)  # Can be Simple or Complex
     amount = Required(float)
@@ -15,6 +16,10 @@ class Compensation(db.Entity):
     statement = Required(Statement)
 
     def get_formatted_data(self) -> dict:
+        """
+        Returns full formatted compensation data.
+        :return: dict
+        """
         return {
             "name": self.name,
             "type": self.type,
@@ -25,6 +30,10 @@ class Compensation(db.Entity):
         }
 
     def get_partial_data(self) -> dict:
+        """
+        Returns partial formatted compensation data.
+        :return: dict
+        """
         return {
             "amount": self.amount,
             "deals_count": self.deals_count,

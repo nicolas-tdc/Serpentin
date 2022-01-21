@@ -1,4 +1,5 @@
-class CompensationHelpers():
+class CompensationHelpers:
+
     def __init__(self, count, closed_count, total, target=0):
         self.count = count
         self.closed_count = closed_count
@@ -6,10 +7,18 @@ class CompensationHelpers():
         self.target = target
 
     def calculate_simple_compensation(self):
+        """
+        Simple compensations calculations.
+        :return: int
+        """
         bonus = 0.1 * self.total if self.closed_count < 4 else 0.2 * self.total
         return bonus if bonus > 500 else 500
 
     def calculate_complex_compensation(self):
+        """
+        Complex compensations calculations.
+        :return: int
+        """
         bonus = 0
         target_achievement = self.total / self.target
         if 0 <= target_achievement <= 0.5:
