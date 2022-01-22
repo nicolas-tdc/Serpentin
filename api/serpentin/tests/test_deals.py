@@ -1,5 +1,4 @@
 import unittest
-import pytest
 from pony.orm import db_session, select
 
 from serpentin.app import create_app

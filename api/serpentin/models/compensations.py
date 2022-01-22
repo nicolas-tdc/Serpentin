@@ -13,7 +13,7 @@ class Compensation(db.Entity):
     closed_deals_count = Optional(int)
     draft = Optional(bool)
 
-    statement = Required(Statement)
+    statement = Optional(Statement)
 
     def get_formatted_data(self) -> dict:
         """
