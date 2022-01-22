@@ -17,9 +17,9 @@ db.generate_mapping(create_tables=True)
 
 # Provision database
 
-def connect_to_database():
+def connect_to_database(database_path="./database.sqlite"):
     db.provider = db.schema = None
-    db.bind(provider="sqlite", filename="./database.sqlite", create_db=True)
+    db.bind(provider="sqlite", filename=database_path, create_db=True)
 
     from serpentin.models import compensations
     from serpentin.models import deals

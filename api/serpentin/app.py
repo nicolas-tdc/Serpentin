@@ -5,7 +5,7 @@ from serpentin.api import register_api
 from serpentin.core.database import connect_to_database
 
 
-def create_app():
+def create_app(database_path="./database.sqlite"):
     app = Flask("serpentin")
     app.config["ENV"] = "development"
 
@@ -19,6 +19,6 @@ def create_app():
     register_api(app)
 
     # Database
-    connect_to_database()
+    connect_to_database(database_path)
 
     return app
