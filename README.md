@@ -45,10 +45,3 @@ $ npm run dev
 
 Le framework UI utilisé est Vuetify et devra être utilisé pour les écrans. Le framework front est NuxtJS.
 
-
-## Votre mission
-
-* Implémenter la compensation simple et faire les managers + api + ui en suivant l'exemple des deals.
-* Implémenter la création de statement et faire les managers + api + ui.
-* Ajouter un flag `draft` sur les compensations pour qu'elles ne soient pas comptées.
-* Implémenter la compensation complexe.
